@@ -41,7 +41,7 @@ $('body').on('touchstart', function() {
     }
 });
 
-$('bttn').on('touchstart', function() {
+$('btn').on('touchstart', function() {
     var userChosenColour = $(this).attr("id");
     userClickedPattern.push(userChosenColour);
     playSound(userChosenColour);
