@@ -33,6 +33,23 @@ $(".btn").click(function () {
     
 })
 
+$('body').on('touchstart', function() {
+    if (!gameStarted) {
+        $("h1").text("Level " + level);
+        nextSequence();
+        gameStarted = true;
+    }
+});
+
+$('bttn').on('touchstart', function() {
+    var userChosenColour = $(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+    playSound(userChosenColour);
+    animatePress(userChosenColour);
+    checkAnswer(userClickedPattern.length-1);
+});
+
+
 function checkAnswer(currentLevel) {
     if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
         console.log("success");
