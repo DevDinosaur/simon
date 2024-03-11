@@ -6,7 +6,7 @@ var gamePattern = [];
 var userClickedPattern = [];
 
 $(window).resize(function() {
-    if ($(window).width() <= 650) {
+    if (($(window).width() <= 675) || ($(window).height() <= 500)) {
         $('#level-title').text('Tap Anywhere to Start');
     }
 }).resize(); // Trigger resize on page load
@@ -33,15 +33,28 @@ $(".btn").click(function () {
     
 })
 
-$('body').on('touchstart', function() {
-    if (!gameStarted) {
+// $('body').on('touchstart', function() {
+//     if (!gameStarted) {
+//         $("h1").text("Level " + level);
+//         nextSequence();
+//         gameStarted = true;
+//     }
+// });
+
+$('body').on('touchstart', function(event) {
+    // Check if the touch event target is not one of the buttons
+    if ((!$(event.target).closest('.btn').length) && (!gameStarted)) {
         $("h1").text("Level " + level);
         nextSequence();
         gameStarted = true;
     }
 });
 
-$('btn').on('touchstart', function() {
+
+$('btn').on('touchstart', function(event) {
+
+    event.stopPropagation();
+
     var userChosenColour = $(this).attr("id");
     userClickedPattern.push(userChosenColour);
     playSound(userChosenColour);
